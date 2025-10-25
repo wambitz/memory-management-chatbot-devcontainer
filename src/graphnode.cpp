@@ -2,7 +2,9 @@
 
 #include "graphedge.h"
 
-GraphNode::GraphNode(int id) { _id = id; }
+GraphNode::GraphNode(int id) {
+    _id = id;
+}
 
 GraphNode::~GraphNode() {
     //// STUDENT CODE
@@ -17,11 +19,17 @@ GraphNode::~GraphNode() {
     //// EOF STUDENT CODE
 }
 
-void GraphNode::AddToken(std::string token) { _answers.push_back(token); }
+void GraphNode::AddToken(std::string token) {
+    _answers.push_back(token);
+}
 
-void GraphNode::AddEdgeToParentNode(GraphEdge* edge) { _parentEdges.push_back(edge); }
+void GraphNode::AddEdgeToParentNode(GraphEdge* edge) {
+    _parentEdges.push_back(edge);
+}
 
-void GraphNode::AddEdgeToChildNode(GraphEdge* edge) { _childEdges.push_back(edge); }
+void GraphNode::AddEdgeToChildNode(GraphEdge* edge) {
+    _childEdges.push_back(edge);
+}
 
 //// STUDENT CODE
 ////

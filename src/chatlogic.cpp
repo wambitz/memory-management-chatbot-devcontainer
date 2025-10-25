@@ -110,7 +110,8 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
             });
             if (type != tokens.end()) {
                 // check for id
-                auto idToken = std::find_if(tokens.begin(),
+                auto idToken = std::find_if(
+                    tokens.begin(),
                     tokens.end(),
                     [](const std::pair<std::string, std::string>& pair) {
                     return pair.first == "ID";
@@ -150,12 +151,14 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
 
                         // find tokens for incoming (parent) and outgoing
                         // (child) node
-                        auto parentToken = std::find_if(tokens.begin(),
+                        auto parentToken = std::find_if(
+                            tokens.begin(),
                             tokens.end(),
                             [](const std::pair<std::string, std::string>& pair) {
                             return pair.first == "PARENT";
                         });
-                        auto childToken = std::find_if(tokens.begin(),
+                        auto childToken = std::find_if(
+                            tokens.begin(),
                             tokens.end(),
                             [](const std::pair<std::string, std::string>& pair) {
                             return pair.first == "CHILD";
@@ -232,7 +235,9 @@ void ChatLogic::SetPanelDialogHandle(ChatBotPanelDialog* panelDialog) {
     _panelDialog = panelDialog;
 }
 
-void ChatLogic::SetChatbotHandle(ChatBot* chatbot) { _chatBot = chatbot; }
+void ChatLogic::SetChatbotHandle(ChatBot* chatbot) {
+    _chatBot = chatbot;
+}
 
 void ChatLogic::SendMessageToChatbot(std::string message) {
     _chatBot->ReceiveMessageFromUser(message);
@@ -242,4 +247,6 @@ void ChatLogic::SendMessageToUser(std::string message) {
     _panelDialog->PrintChatbotResponse(message);
 }
 
-wxBitmap* ChatLogic::GetImageFromChatbot() { return _chatBot->GetImageHandle(); }
+wxBitmap* ChatLogic::GetImageFromChatbot() {
+    return _chatBot->GetImageHandle();
+}

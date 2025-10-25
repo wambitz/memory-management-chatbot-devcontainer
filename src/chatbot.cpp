@@ -102,12 +102,15 @@ int ChatBot::ComputeLevenshteinDistance(std::string s1, std::string s2) {
     const size_t m(s1.size());
     const size_t n(s2.size());
 
-    if (m == 0) return n;
-    if (n == 0) return m;
+    if (m == 0)
+        return n;
+    if (n == 0)
+        return m;
 
     size_t* costs = new size_t[n + 1];
 
-    for (size_t k = 0; k <= n; k++) costs[k] = k;
+    for (size_t k = 0; k <= n; k++)
+        costs[k] = k;
 
     size_t i = 0;
     for (std::string::const_iterator it1 = s1.begin(); it1 != s1.end(); ++it1, ++i) {

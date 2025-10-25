@@ -45,7 +45,8 @@ ChatBotFrame::ChatBotFrame(const wxString& title)
 
     // create text control for user input
     int idTextXtrl = 1;
-    _userTextCtrl = new wxTextCtrl(ctrlPanel,
+    _userTextCtrl = new wxTextCtrl(
+        ctrlPanel,
         idTextXtrl,
         "",
         wxDefaultPosition,
@@ -202,10 +203,11 @@ ChatBotPanelDialogItem::ChatBotPanelDialogItem(wxPanel* parent, wxString text, b
     wxBitmap* bitmap =
         isFromUser == true
             ? nullptr
-            : ((ChatBotPanelDialog*)parent)->GetChatLogicHandle()->GetImageFromChatbot();
+            : ((ChatBotPanelDialog*) parent)->GetChatLogicHandle()->GetImageFromChatbot();
 
     // create image and text
-    _chatBotImg = new wxStaticBitmap(this,
+    _chatBotImg = new wxStaticBitmap(
+        this,
         wxID_ANY,
         (isFromUser ? wxBitmap(imgBasePath + "user.png", wxBITMAP_TYPE_PNG) : *bitmap),
         wxPoint(-1, -1),
