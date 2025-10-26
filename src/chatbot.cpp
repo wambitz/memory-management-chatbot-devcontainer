@@ -42,7 +42,83 @@ ChatBot::~ChatBot() {
 
 //// STUDENT CODE
 ////
+// copy constructor
+ChatBot::ChatBot(const ChatBot& other) {
+    std::cout << "ChatBot Copy Constructor" << std::endl;
 
+    // Deep copy owned resource
+    _image = other._image ? new wxBitmap(*other._image) : nullptr;
+
+    // Shallow copy non-owning pointers
+    _chatLogic = other._chatLogic;
+    _currentNode = other._currentNode;
+    _rootNode = other._rootNode;
+}
+
+// copy assignment operator
+ChatBot& ChatBot::operator=(const ChatBot& other) {
+    std::cout << "ChatBot Copy Assignment Operator" << std::endl;
+
+    if (this != &other) {
+        // Delete old resource
+        delete _image;
+
+        // Deep copy owned resource
+        _image = other._image ? new wxBitmap(*other._image) : nullptr;
+
+        // Shallow copy non-owning pointers
+        _chatLogic = other._chatLogic;
+        _currentNode = other._currentNode;
+        _rootNode = other._rootNode;
+    }
+
+    return *this;
+}
+
+// move constructor
+ChatBot::ChatBot(ChatBot&& other) noexcept {
+    std::cout << "ChatBot Move Constructor" << std::endl;
+
+    // Transfer ownership of owned resource
+    _image = other._image;
+    other._image = nullptr;
+
+    // Transfer non-owning pointers
+    _chatLogic = other._chatLogic;
+    other._chatLogic = nullptr;
+
+    _currentNode = other._currentNode;
+    other._currentNode = nullptr;
+
+    _rootNode = other._rootNode;
+    other._rootNode = nullptr;
+}
+
+// move assignment operator
+ChatBot& ChatBot::operator=(ChatBot&& other) noexcept {
+    std::cout << "ChatBot Move Assignment Operator" << std::endl;
+
+    if (this != &other) {
+        // Delete old resource
+        delete _image;
+
+        // Transfer ownership of owned resource
+        _image = other._image;
+        other._image = nullptr;
+
+        // Transfer non-owning pointers
+        _chatLogic = other._chatLogic;
+        other._chatLogic = nullptr;
+
+        _currentNode = other._currentNode;
+        other._currentNode = nullptr;
+
+        _rootNode = other._rootNode;
+        other._rootNode = nullptr;
+    }
+
+    return *this;
+}
 ////
 //// EOF STUDENT CODE
 
