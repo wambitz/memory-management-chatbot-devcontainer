@@ -10,10 +10,8 @@ GraphNode::~GraphNode() {
     //// STUDENT CODE
     ////
 
-    if (_chatBot != nullptr) {
-        delete _chatBot;
-        _chatBot = nullptr;
-    }
+    // No manual cleanup needed - ChatBot owned by value 
+    // REMOVED: delete _chatBot;
 
     ////
     //// EOF STUDENT CODE
@@ -34,14 +32,13 @@ void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge) {
 //// STUDENT CODE
 ////
 
-void GraphNode::MoveChatbotHere(ChatBot* chatbot) {
-    _chatBot = chatbot;
-    _chatBot->SetCurrentNode(this);
+void GraphNode::MoveChatbotHere(ChatBot chatbot) {
+    _chatBot = std::move(chatbot);
+    _chatBot.SetCurrentNode(this);
 }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode* newNode) {
-    newNode->MoveChatbotHere(_chatBot);
-    _chatBot = nullptr;  // invalidate pointer at source
+    newNode->MoveChatbotHere(std::move(_chatBot));
 }
 
 ////

@@ -88,6 +88,10 @@ ChatBot::ChatBot(ChatBot&& other) noexcept {
     _chatLogic = other._chatLogic;
     other._chatLogic = nullptr;
 
+    if (_chatLogic != nullptr) {
+        _chatLogic->SetChatbotHandle(this);
+    }
+
     _currentNode = other._currentNode;
     other._currentNode = nullptr;
 
@@ -110,6 +114,10 @@ ChatBot& ChatBot::operator=(ChatBot&& other) noexcept {
         // Transfer non-owning pointers
         _chatLogic = other._chatLogic;
         other._chatLogic = nullptr;
+
+        if (_chatLogic != nullptr) {
+            _chatLogic->SetChatbotHandle(this);
+        }
 
         _currentNode = other._currentNode;
         other._currentNode = nullptr;
