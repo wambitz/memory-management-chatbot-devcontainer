@@ -45,7 +45,8 @@ ChatBotFrame::ChatBotFrame(const wxString& title)
 
     // create text control for user input
     int idTextXtrl = 1;
-    _userTextCtrl = new wxTextCtrl(ctrlPanel,
+    _userTextCtrl = new wxTextCtrl(
+        ctrlPanel,
         idTextXtrl,
         "",
         wxDefaultPosition,
@@ -129,15 +130,15 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow* parent, wxWindowID id)
     ////
 
     // create chat logic instance
-    _chatLogic = new ChatLogic();
+    _chatLogic = std::make_unique<ChatLogic>();
 
     // pass pointer to chatbot dialog so answers can be displayed in GUI
     _chatLogic->SetPanelDialogHandle(this);
 
     // load answer graph from file
     _chatLogic->LoadAnswerGraphFromFile(dataPath + "src/answergraph.txt");
-
     ////
+
     //// EOF STUDENT CODE
 }
 
@@ -145,7 +146,8 @@ ChatBotPanelDialog::~ChatBotPanelDialog() {
     //// STUDENT CODE
     ////
 
-    delete _chatLogic;
+    // No explicit cleanup needed:
+    // _chatLogic is a unique_ptr, automatically destroyed and deallocates ChatLogic
 
     ////
     //// EOF STUDENT CODE
@@ -202,10 +204,11 @@ ChatBotPanelDialogItem::ChatBotPanelDialogItem(wxPanel* parent, wxString text, b
     wxBitmap* bitmap =
         isFromUser == true
             ? nullptr
-            : ((ChatBotPanelDialog*)parent)->GetChatLogicHandle()->GetImageFromChatbot();
+            : ((ChatBotPanelDialog*) parent)->GetChatLogicHandle()->GetImageFromChatbot();
 
     // create image and text
-    _chatBotImg = new wxStaticBitmap(this,
+    _chatBotImg = new wxStaticBitmap(
+        this,
         wxID_ANY,
         (isFromUser ? wxBitmap(imgBasePath + "user.png", wxBITMAP_TYPE_PNG) : *bitmap),
         wxPoint(-1, -1),
