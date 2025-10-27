@@ -42,6 +42,7 @@ ChatBot::~ChatBot() {
 
 //// STUDENT CODE
 ////
+
 // copy constructor
 ChatBot::ChatBot(const ChatBot& other) {
     std::cout << "ChatBot Copy Constructor" << std::endl;
@@ -119,6 +120,7 @@ ChatBot& ChatBot::operator=(ChatBot&& other) noexcept {
 
     return *this;
 }
+
 ////
 //// EOF STUDENT CODE
 
